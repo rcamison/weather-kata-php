@@ -1,8 +1,8 @@
 <?php
 
-require HttpClient;
+namespace Codium\CleanCode;
 
-class Forecast 
+class ForecastWind implements Forecast
 {
     private HttpClient $_client ;
 
@@ -17,7 +17,7 @@ class Forecast
         if ($datetime >= new \DateTime("+6 days 00:00:00")) {
             return ""
         }
-
+        
         // Find the id of the city on metawheather
         $woeid = $this._client.get_woeid($city);
         $city = $woeid;
@@ -25,15 +25,12 @@ class Forecast
         // Find the predictions for the city
         $results = $this._client.get_consolidated_weather($woeid);
 
-        return $results;
-    }
-
-    public function isDateFormatOk (string $date)
-    {
-        if ($date == $datetime->format('Y-m-d')) {
-            return true;
+        foreach ($results as $result) {
+            // When the date is the expected
+            if ($result["applicable_date"] == $datetime->format('Y-m-d')) {
+                 return $result['wind_speed'];
+            }
         }
-
-        return false;
     }
+
 }

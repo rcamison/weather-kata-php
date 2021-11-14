@@ -1,0 +1,8 @@
+version: '3'
+services:
+  phpunit:
+    image: php:7.1
+    volumes:
+      - .:/vendor/bin/phpunit
+    working_dir: /vendor/bin/phpunit
+    entrypoint: vendor/bin/phpunit

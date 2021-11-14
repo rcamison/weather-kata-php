@@ -2,8 +2,11 @@
 
 namespace Tests\Codium\CleanCode;
 
+require HttpClient;
+
 use Codium\CleanCode\Forecast;
 use PHPUnit\Framework\TestCase;
+use GuzzleHttp\Client;
 
 class WeatherTest extends TestCase
 {
@@ -11,7 +14,9 @@ class WeatherTest extends TestCase
     /** @test */
     public function find_the_weather_of_today()
     {
-        $forecast = new Forecast();
+        HttpClient $client = new Client();
+
+        $forecast = new Forecast($client);
         $city = "Madrid";
 
         $prediction = $forecast->predict($city);
@@ -20,49 +25,4 @@ class WeatherTest extends TestCase
         $this->assertTrue(true, 'I don\'t know how to test it');
     }
 
-    /** @test */
-    public function find_the_weather_of_any_day()
-    {
-        $forecast = new Forecast();
-        $city = "Madrid";
-
-        $prediction = $forecast->predict($city, new \DateTime('+2 days'));
-
-        echo "Day after tomorrow: $prediction\n";
-        $this->assertTrue(true, 'I don\'t know how to test it');
-    }
-
-    /** @test */
-    public function find_the_wind_of_any_day()
-    {
-        $forecast = new Forecast();
-        $city = "Madrid";
-
-        $prediction = $forecast->predict($city, null, true);
-
-        echo "Wind: $prediction\n";
-        $this->assertTrue(true, 'I don\'t know how to test it');
-    }
-
-    /** @test */
-    public function change_the_city_to_woeid()
-    {
-        $forecast = new Forecast();
-        $city = "Madrid";
-
-        $forecast->predict($city, null, true);
-
-        $this->assertEquals("766273", $city);
-    }
-
-    /** @test */
-    public function there_is_no_prediction_for_more_than_5_days()
-    {
-        $forecast = new Forecast();
-        $city = "Madrid";
-
-        $prediction = $forecast->predict($city, new \DateTime('+6 days'));
-
-        $this->assertEquals("", $prediction);
-    }
 }
