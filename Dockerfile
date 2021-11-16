@@ -6,6 +6,6 @@ COPY . .
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN apt-get update && apt-get install && apt-get -y install git
+RUN apt-get update && apt-get install && apt-get -y install git && apt-get -y install vim
 
 RUN make install

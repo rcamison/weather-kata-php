@@ -2,11 +2,9 @@
 
 namespace Tests\Codium\CleanCode;
 
-require HttpClient;
-
-use Codium\CleanCode\Forecast;
+use Codium\CleanCode\ForecastWeather;
 use PHPUnit\Framework\TestCase;
-use GuzzleHttp\Client;
+use Codium\CleanCode\GuzzleHttpClient;
 
 class WeatherTest extends TestCase
 {
@@ -14,9 +12,9 @@ class WeatherTest extends TestCase
     /** @test */
     public function find_the_weather_of_today()
     {
-        HttpClient $client = new Client();
+        $client = new GuzzleHttpClient();
 
-        $forecast = new Forecast($client);
+        $forecast = new ForecastWeather($client);
         $city = "Madrid";
 
         $prediction = $forecast->predict($city);
