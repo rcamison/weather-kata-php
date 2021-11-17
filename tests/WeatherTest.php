@@ -72,4 +72,19 @@ class WeatherTest extends TestCase
         $this->assertEquals("766273", $city);
     }
 
+    /** @test */
+    public function there_is_no_prediction_for_more_than_5_days()
+    {
+
+        $client = new GuzzleHttpClient();
+
+        $forecast = new ForecastWeather();
+        $city = "Madrid";
+
+        $prediction = $forecast->predict($city, new \DateTime('+6 days'));
+
+        echo "No Prediction > 5 Days \n";
+        $this->assertEquals("", $prediction);
+    }
+
 }
