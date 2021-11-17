@@ -37,4 +37,21 @@ class WeatherTest extends TestCase
         $this->assertTrue(true, 'I don\'t know how to test it');
     }
 
+    /** @test */
+    public function change_the_city_to_woeid()
+    {
+
+        $client = new GuzzleHttpClient();
+
+        $forecast = new ForecastWeather($client);
+        $city = "Madrid";
+
+        $noDate = null;
+
+        $forecast->predict($city, $noDate);
+
+        echo "Validation City to Woeid Complete\n";
+        $this->assertEquals("766273", $city);
+    }
+
 }
