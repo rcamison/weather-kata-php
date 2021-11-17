@@ -2,3 +2,11 @@
 js/node_modules
 vendor
 .vscode/*
+src/_Forecast.php
+src/Herencia/Forecast Herencia.php
+src/Herencia/ForecastWeather.php
+src/Herencia/ForecastWind.php
+tests/Herencia/WeatherTest.php
+tests/_WeatherTest.php
+tests/WeatherTest - copia.php
+tests/WeatherTest - copia.php
